@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    chart: nginx-lego-0.2.0
+  name: nginx-pub-nginx-lego-default-backend
+  namespace: public
+spec:
+  clusterIP: ${NGINX_PUB_BACKEND_CLUSTER_IP}
+  ports:
+  - port: ${NGINX_PUB_BACKEND_PORT}
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: nginx-pub-nginx-lego-default-backend
+  sessionAffinity: None
+  type: ClusterIP

@@ -1,0 +1,30 @@
+.catalog:
+    name: Buildit Kibana
+    version: 0.0.2-buildit
+    description: "Buildit Kibana Elastic Search Data Visualizer"
+    maintainer: "BuildIt"
+    questions:
+        - variable: "ELASTICSEARCH_URL"
+          type: "string"
+          default: "http://elasticsearch-logging:9200"
+          label: "Elastic Search logging URL"
+          description: "Elastic Search logging URL"
+          required: true
+        - variable: "KIBANA_BASE_URL"
+          type: "string"
+          default: ""
+          label: "Kibana base URL"
+          description: "Kibana base URL"
+          required: true
+        - variable: "KIBANA_HOST_NAME"
+          type: "string"
+          default: "kibana.riglet"
+          label: "Kibana Hotname"
+          description: "Kibana Hotname"
+          required: true
+        - variable: "KIBANA_SERVICE_PORT"
+          type: "int"
+          default: 80
+          label: "Kibana Service Port"
+          description: "Public Kibana Service Port"
+          required: true

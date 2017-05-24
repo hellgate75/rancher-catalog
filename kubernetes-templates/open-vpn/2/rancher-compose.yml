@@ -1,0 +1,114 @@
+.catalog:
+    name: Buildit Open VPN
+    version: 0.0.2-buildit-aws-elb
+    description: "Buildit Open VPN Access Manager"
+    maintainer: "BuildIt"
+    questions:
+        - variable: "OPEN_VPN_SECRET_CERT"
+          type: "string"
+          default: "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"
+          label: "Open VPN P12 Certificate Store"
+          description: "Base64 of p12 certificate store"
+          required: true
+        - variable: "OPEN_VPN_SECRET_PEM"
+          type: "string"
+          default: "LS0tLS1CRUdJTiBESCBQQVJBTUVURVJTLS0tLS0KTUlHSEFvR0JBTENCRjRkOXF3S013aTdrY21GL2oxRWh4aE1tcW9ENHRmaXR3QlBQUVlCUzBkeldoNzNEMmdldgpVZEg1WXlIdnV5OCsyMkU5Zjhxckl3OGlJRktjWjY0Qk9RcldWOHNsY2UxdFVXTmVid3MrQjBPL2FDZ2xIVmNRCjRQdmxCb3kyd2FOWWt0UFJEZldMZlRXVUtPK3orMnR5NzRVVlpEM3RvU2s3UzRqbVY5NjdBZ0VDCi0tLS0tRU5EIERIIFBBUkFNRVRFUlMtLS0tLQo="
+          label: "Open VPN PEM Certicate"
+          description: "Base64 of server dh"
+          required: true
+        - variable: "OPEN_VPN_SECRET_PASSWD"
+          type: "string"
+          default: "UGFzc3dvcmQxMjM="
+          label: "Base Password"
+          description: "Base64 password (default: Password123)"
+          required: true
+        - variable: "OPEN_VPN_LOAD_BALANCER"
+          type: "string"
+          default: "a6fab72e20f6111e7ad030a31f40c1a5-2051985363.ap-northeast-1.elb.amazonaws.com"
+          label: "External Load Balancer hostname"
+          description: "External Load Balancer used to connect the Open-VPN Host for access authentication, External Endpoint. You can use an elastic IP to connect the Open-VPN service to the external network"
+          required: true
+        - variable: "OPEN_VPN_PORT"
+          type: "int"
+          default: 443
+          label: "Open-VPN Exposed Port"
+          description: "Public Open-VPN Port"
+          required: true
+        - variable: "OVPN_NETWORK"
+          type: "string"
+          default: "10.240.0.0"
+          label: "Samba AD-DC Open-VPN Network"
+          description: "Samba AD-DC Open-VPN Network"
+          required: true
+        - variable: "OVPN_SUBNET"
+          type: "string"
+          default: "255.255.0.0"
+          label: "Samba AD-DC Open-VPN SubNetwork"
+          description: "Samba AD-DC Open-VPN SubNetwork"
+          required: true
+        - variable: "OVPN_PROTO"
+          type: "string"
+          default: "tcp"
+          label: "Samba AD-DC Open-VPN Protocol"
+          description: "Samba AD-DC Open-VPN Protocol"
+          required: true
+        - variable: "OVPN_K8S_SERVICE_NETWORK"
+          type: "string"
+          default: "100.0.0.0"
+          label: "Open-VPN Kubernetes Service Network"
+          description: "Open-VPN Kubernetes Service Network"
+          required: true
+        - variable: "OVPN_K8S_SERVICE_SUBNET"
+          type: "string"
+          default: "255.0.0.0"
+          label: "Open-VPN Kubernetes Service SubNetwork"
+          description: "Open-VPN Kubernetes Service SubNetwork"
+          required: true
+        - variable: "OVPN_K8S_POD_NETWORK"
+          type: "string"
+          default: "10.0.0.0"
+          label: "Open-VPN Kubernetes PODs Network"
+          description: "Open-VPN Kubernetes PODs Network"
+          required: true
+        - variable: "OVPN_K8S_POD_SUBNET"
+          type: "string"
+          default: "255.0.0.0"
+          label: "Open-VPN Kubernetes PODs SubNetwork"
+          description: "Open-VPN Kubernetes PODs SubNetwork"
+          required: true
+        - variable: "LDAP_URL"
+          type: "string"
+          default: "ldap://ad-dc-samba-ad-dc.default.svc.cluster.local"
+          label: "Samba AD-DC LDAP URL"
+          description: "Samba AD-DC LDAP URL"
+          required: true
+        - variable: "LDAP_BASE_NAME"
+          type: "string"
+          default: "CN=Users,dc=corp,dc=riglet,dc=io"
+          label: "Samba AD-DC LDAP Base Name"
+          description: "Samba AD-DC LDAP Base Name"
+          required: true
+        - variable: "LDAP_BIND_NAME"
+          type: "string"
+          default: "CN=k8srig3,CN=Users,DC=corp,DC=riglet,DC=io"
+          label: "Samba AD-DC LDAP Bind Name"
+          description: "Samba AD-DC LDAP Bind Name"
+          required: true
+        - variable: "REQUIRE_CERT"
+          default: "true"
+          label: "Require Certificate Authentication"
+          description: "Require Certificate Authentication"
+          type: "enum"
+          options:
+            - "true"
+            - "false"
+          required: true
+        - variable: "REQUIRE_PAM"
+          default: "true"
+          label: "Require PAM Authentication"
+          description: "Require PAM Authentication"
+          type: "enum"
+          options:
+            - "true"
+            - "false"
+          required: true

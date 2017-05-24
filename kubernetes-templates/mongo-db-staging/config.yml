@@ -1,0 +1,6 @@
+name: Buildit MogoDb Staging
+version: 0.0.2-buildit
+description: |
+  MogoDb Staging Buildit component is NoSQL database optimized for Eolas/Synapse Apps
+  for Rancher Kubernetes environments.
+category: Database

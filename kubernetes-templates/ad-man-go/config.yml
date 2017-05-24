@@ -1,0 +1,6 @@
+name: Buildit AD-Manager Go
+version: 0.0.2-buildit
+description: |
+  Ad-Manager Go Buildit component is a AD manager
+  for Rancher Kubernetes environments.
+category: System

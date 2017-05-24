@@ -1,0 +1,29 @@
+.catalog:
+    name: Buildit ElasticSearch
+    version: 0.0.1-buildit
+    description: "Buildit ElasticSearch Engine. Self-defined Cluster-IP version."
+    maintainer: "BuildIt"
+    questions:
+        - variable: "ELASTIC_SEARCH_CLUSTER_IP"
+          type: "string"
+          default: "100.67.194.6"
+          label: "Elastic Search Cluster IP"
+          description: "Elastic Search Cluster IP"
+        - variable: "ELASTIC_SEARCH_HOST_NAME"
+          type: "string"
+          default: "elastic-search.riglet"
+          label: "Elastic Search Hostname"
+          description: "Elastic Search Hostname"
+          required: true
+        - variable: "ELASTIC_DB_PORT"
+          type: "int"
+          default: 9200
+          label: "ElasticSearch Exposed Db Port"
+          description: "Public ElasticSearch Db Port"
+          required: true
+        - variable: "ELASTIC_PORT"
+          type: "int"
+          default: 9300
+          label: "ElasticSearch Exposed Port"
+          description: "Public ElasticSearch Port"
+          required: true

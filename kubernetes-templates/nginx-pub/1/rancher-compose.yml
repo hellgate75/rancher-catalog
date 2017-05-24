@@ -1,0 +1,51 @@
+.catalog:
+    name: Buildit Nginx Public
+    version: 0.0.1-buildit
+    description: "Buildit Nginx Public Reverse Proxy. Self-defined Cluster-IP version."
+    maintainer: "BuildIt"
+    questions:
+        - variable: "NGINX_PUB_BACKEND_CLUSTER_IP"
+          type: "string"
+          default: "100.64.12.230"
+          label: "Nginx Public Backend Cluster IP"
+          description: "Nginx Public Backend Cluster IP"
+        - variable: "NGINX_PUB_CLUSTER_IP"
+          type: "string"
+          default: "100.66.140.123"
+          label: "Nginx Public Cluster IP"
+          description: "Nginx Public Cluster IP"
+        - variable: "NGINX_PUB_MONITORING_CLUSTER_IP"
+          type: "string"
+          default: "100.70.139.246"
+          label: "Nginx Public Monitoring Cluster IP"
+          description: "Nginx Public Monitoring Cluster IP"
+        - variable: "NGINX_PUB_HOST_NAME"
+          type: "string"
+          default: "openvpn.riglet"
+          label: "Open-VPN hostname"
+          description: "Open-VPN hostname"
+          required: true
+        - variable: "NGINX_PUB_BACKEND_PORT"
+          type: "int"
+          default: 80
+          label: "Nginx Exposed Backend Port"
+          description: "Public NGinx Backend Port"
+          required: true
+        - variable: "NGINX_PUB_HTTP_PORT"
+          type: "int"
+          default: 80
+          label: "Nginx Exposed Http Port"
+          description: "Public NGinx Http Port"
+          required: true
+        - variable: "NGINX_PUB_HTTPS_PORT"
+          type: "int"
+          default: 443
+          label: "Nginx Exposed Https Port"
+          description: "Public NGinx Https Port"
+          required: true
+        - variable: "NGINX_PUB_MONITORING_PORT"
+          type: "int"
+          default: 18080
+          label: "Nginx Exposed Monitoring Port"
+          description: "Public NGinx Monitoring Port"
+          required: true

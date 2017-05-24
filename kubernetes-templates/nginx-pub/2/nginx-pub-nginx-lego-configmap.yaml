@@ -1,0 +1,13 @@
+apiVersion: v1
+data:
+  body-size: 32m
+  enable-vts-status: "true"
+  hsts-include-subdomains: "false"
+  proxy-connect-timeout: "30"
+  proxy-read-timeout: "600"
+  proxy-send-imeout: "600"
+  server-name-hash-bucket-size: "256"
+kind: ConfigMap
+metadata:
+  name: nginx-pub-nginx-lego
+  namespace: public

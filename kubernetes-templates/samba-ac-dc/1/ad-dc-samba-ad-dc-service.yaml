@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    chart: samba-ad-dc-0.1.0
+  name: ad-dc-samba-ad-dc
+  namespace: default
+spec:
+  ports:
+  - name: ldap
+    port: ${SAMBA_LDAP_PORT}
+    targetPort: 389
+    protocol: TCP
+    targetPort: ldap
+  - name: dns
+    port: ${SAMBA_DNS_PORT}
+    targetPort: 53
+    protocol: TCP
+    targetPort: dns
+  selector:
+    app: ad-dc-samba-ad-dc
+  sessionAffinity: None
+  type: ClusterIP

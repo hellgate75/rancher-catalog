@@ -1,0 +1,6 @@
+name: Buildit Jenkins
+version: 0.0.2-buildit
+description: |
+  Jenkins Buildit component is a qualified and optimized Jenkins Service
+  for Rancher Kubernetes environments.
+category: Application

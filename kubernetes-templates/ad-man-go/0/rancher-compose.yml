@@ -1,0 +1,35 @@
+.catalog:
+    name: Buildit AD-Manager Go
+    version: 0.0.1-buildit
+    description: "Buildit AD-Manager Go AD Manager. Self-defined Cluster-IP version."
+    maintainer: "BuildIt"
+    questions:
+        - variable: "AD_MAN_GO_CLUSTER_IP"
+          type: "string"
+          default: "100.67.194.5"
+          label: "AD-Manager Go Cluster IP"
+          description: "AD-Manager Go Cluster IP"
+        - variable: "BASE_DN"
+          type: "string"
+          default: "CN=Users,DC=corp,DC=riglet,DC=io"
+          label: "DC Base DN String"
+          description: "Specify the Base DN for your DC"
+          required: true
+        - variable: "DC_URL"
+          type: "string"
+          default: "ad-dc-samba-ad-dc"
+          label: "Directory Controller Hostname"
+          description: "Specify Di rectory Controller Hostname"
+          required: true
+        - variable: "GO_AD_HOSTNAME"
+          type: "string"
+          default: "ad-man.riglet"
+          label: "Ad-Manager Go Hostname"
+          description: "Ad-Manager Go Hostname"
+          required: true
+        - variable: "GO_AD_PORT"
+          type: "int"
+          default: 80
+          label: "Exposed Go AD-Manager Port"
+          description: "Public Go-AD Server Port"
+          required: true

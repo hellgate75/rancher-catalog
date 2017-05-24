@@ -1,0 +1,36 @@
+.catalog:
+    name: Buildit Nginx Public
+    version: 0.0.2-buildit
+    description: "Buildit Nginx Public Reverse Proxy"
+    maintainer: "BuildIt"
+    questions:
+        - variable: "NGINX_PUB_HOST_NAME"
+          type: "string"
+          default: "openvpn.riglet"
+          label: "Open-VPN hostname"
+          description: "Open-VPN hostname"
+          required: true
+        - variable: "NGINX_PUB_BACKEND_PORT"
+          type: "int"
+          default: 80
+          label: "Nginx Exposed Backend Port"
+          description: "Public NGinx Backend Port"
+          required: true
+        - variable: "NGINX_PUB_HTTP_PORT"
+          type: "int"
+          default: 80
+          label: "Nginx Exposed Http Port"
+          description: "Public NGinx Http Port"
+          required: true
+        - variable: "NGINX_PUB_HTTPS_PORT"
+          type: "int"
+          default: 443
+          label: "Nginx Exposed Https Port"
+          description: "Public NGinx Https Port"
+          required: true
+        - variable: "NGINX_PUB_MONITORING_PORT"
+          type: "int"
+          default: 18080
+          label: "Nginx Exposed Monitoring Port"
+          description: "Public NGinx Monitoring Port"
+          required: true

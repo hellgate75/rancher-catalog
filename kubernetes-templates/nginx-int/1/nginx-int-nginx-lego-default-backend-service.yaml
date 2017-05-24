@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    chart: nginx-lego-0.2.0
+  name: nginx-int-nginx-lego-default-backend
+  namespace: default
+spec:
+  ports:
+  - port: ${NGINX_INT_BACKEND_PORT}
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: nginx-int-nginx-lego-default-backend
+  sessionAffinity: None
+  type: ClusterIP

@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  generation: 1
+  name: openvpn-openvpn
+  namespace: default
+spec:
+  rules:
+  - host: ${OPEN_VPN_HOST_NAME}
+    http:
+      paths:
+      - backend:
+          serviceName: openvpn-openvpn
+          servicePort: ${OPEN_VPN_PORT}
+        path: /

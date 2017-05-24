@@ -1,0 +1,66 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: kibana-logging
+  namespace: kube-system
+  labels:
+    k8s-app: kibana-logging
+    kubernetes.io/cluster-service: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: kibana-logging
+  template:
+    metadata:
+      labels:
+        k8s-app: kibana-logging
+    spec:
+      containers:
+      - name: kibana-logging
+        image: gcr.io/google_containers/kibana:v4.6.1-1
+        resources:
+          # keep request = limit to keep this container in guaranteed class
+          limits:
+            cpu: 100m
+          requests:
+            cpu: 100m
+        env:
+          - name: "ELASTICSEARCH_URL"
+            value: "http://elasticsearch-logging:9200"
+          - name: "KIBANA_BASE_URL"
+            value: ""
+        ports:
+        - containerPort: 5601
+          protocol: TCP
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: kibana-logging
+  namespace: kube-system
+  labels:
+    k8s-app: kibana-logging
+spec:
+  type: ClusterIP
+  ports:
+  - port: ${KIBANA_SERVICE_PORT}
+    protocol: TCP
+    targetPort: 5601
+  selector:
+    k8s-app: kibana-logging
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  namespace: kube-system
+  name: kibana-logging
+spec:
+  rules:
+  - host: ${KIBANA_HOST_NAME}
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: kibana-logging
+          servicePort: ${KIBANA_SERVICE_PORT}

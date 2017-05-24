@@ -1,0 +1,18 @@
+.catalog:
+    name: Buildit MogoDb Staging
+    version: 0.0.2-buildit
+    description: "Buildit MogoDb Staging Eolas/Synapse Optimized NoSQL Database"
+    maintainer: "BuildIt"
+    questions:
+        - variable: "MONGODB_HOST_NAME"
+          type: "string"
+          default: "mongo-staging-mongodb"
+          label: "MongoDb Hostname"
+          description: "MongoDb Hostname"
+          required: true
+        - variable: "MONGODB_PORT"
+          type: "int"
+          default: 27017
+          label: "MongoDb Service Exposed Port"
+          description: "Public MongoDv Service Port"
+          required: true

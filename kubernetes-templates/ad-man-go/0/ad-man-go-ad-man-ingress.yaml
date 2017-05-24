@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  generation: 1
+  name: ad-man-go-ad-man
+  namespace: default
+spec:
+  rules:
+  - host: ${GO_AD_HOSTNAME}
+    http:
+      paths:
+      - backend:
+          serviceName: ad-man-go-ad-man
+          servicePort: ${GO_AD_PORT}
+        path: /

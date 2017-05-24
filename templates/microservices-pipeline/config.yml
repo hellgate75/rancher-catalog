@@ -1,0 +1,9 @@
+name: BuildIt - Dublin Architecture Department Microservices POC Ansible Pipeline
+description: |
+  Collection of Generic/Qualified Pipelinea from Ansible Repositories. In the stack we have the configuration of : Jenkins Ansible, Nexus Ansible, PostgreSQL for SonarQube, SonarQube.
+  All the ansible procedure will be pulled from a single repository and downloaded on the platform. This playbook wiil have a local scope for the playbooks execution, any role must accept as host: all, local or <ansible host>.
+  In the list we have at the moment :
+    *** BuildIt Dublin Architecture Department Microservices POC Pipeline
+version: v1
+category: Applications
+maintainer: Fabrizio Torelli <fabrizio.torelli@wipro.com>

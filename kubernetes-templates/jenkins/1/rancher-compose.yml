@@ -1,0 +1,24 @@
+.catalog:
+    name: Buildit Jenkins
+    version: 0.0.2-buildit
+    description: "Buildit Jenkins Application"
+    maintainer: "BuildIt"
+    questions:
+        - variable: "JENKINS_HOST_NAME"
+          type: "string"
+          default: "jenkins.riglet"
+          label: "Jenkins Hostname"
+          description: "Jenkins Hostname"
+          required: true
+        - variable: "JENKINS_PORT"
+          type: "int"
+          default: 8080
+          label: "Jenkins Http Service Port"
+          description: "Public Jenkins Service Http Port"
+          required: true
+        - variable: "JENKINS_SLAVE_PORT"
+          type: "int"
+          default: 50000
+          label: "Jenkins Slave Proxy Port"
+          description: "Public Jenkins Slave Proxy Port"
+          required: true

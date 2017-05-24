@@ -1,0 +1,6 @@
+name: Buildit Kubernetes DNS
+version: 0.0.2-buildit-aws
+description: |
+  Kubernetes DNS Buildit component is a collection of DNS Controller, Autoscaler and Kube-DNS Stacks
+  for Rancher Kubernetes environments.
+category: System

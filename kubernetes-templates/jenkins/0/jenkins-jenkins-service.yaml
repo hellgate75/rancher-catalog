@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    chart: jenkins-0.1.14
+    component: jenkins-jenkins-master
+    heritage: Tiller
+    release: jenkins
+  name: jenkins-jenkins
+  namespace: default
+spec:
+  clusterIP: ${JENKINS_CLUSTER_IP}
+  ports:
+  - name: http
+    port: ${JENKINS_PORT}
+    protocol: TCP
+    targetPort: 8080
+  - name: slavelistener
+    port: ${JENKINS_SLAVE_PORT}
+    protocol: TCP
+    targetPort: 50000
+  selector:
+    component: jenkins-jenkins-master
+  sessionAffinity: None
+  type: ClusterIP

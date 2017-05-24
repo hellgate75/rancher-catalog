@@ -1,0 +1,36 @@
+.catalog:
+    name: BuildIt Samba AD-DC
+    version: 0.0.2-buildit
+    description: "BuildIt Samba AD-DC Domain Controller"
+    maintainer: "BuildIt"
+    questions:
+        - variable: "SAMBA_REALM"
+          type: "string"
+          default: "corp.riglet.io"
+          label: "Realm for Samba AD-DC Server"
+          description: "Realm for Samba AC-DC Server"
+          required: true
+        - variable: "SAMBA_PASSWORD"
+          type: "string"
+          default: "Password123"
+          label: "Administration Password for Samba AD-DC Server"
+          description: "Administration Password for Samba AD-DC Server"
+          required: true
+        - variable: "SAMBA_HOSTNAME"
+          type: "string"
+          default: "ad-dc-samba-ad-dc.default.svc.cluster.local"
+          label: "Hostname assigned to Samba AD-DC Server"
+          description: "Hostname assigned to Samba AD-DC Server"
+          required: true
+        - variable: "SAMBA_LDAP_PORT"
+          type: "int"
+          default: 389
+          label: "LDAP Exposed Exposed for Samba AD-DC Server"
+          description: "LDAP Public Port for Samba AD-DC Server"
+          required: true
+        - variable: "SAMBA_DNS_PORT"
+          type: "int"
+          default: 53
+          label: "DNS  Exposed Port for Samba AD-DC Server"
+          description: "DNS Public Port for Samba AD-DC Server"
+          required: true

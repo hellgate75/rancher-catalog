@@ -1,0 +1,29 @@
+.catalog:
+    name: Buildit Jenkins
+    version: 0.0.1-buildit
+    description: "Buildit Jenkins Application. Self-defined Cluster-IP version."
+    maintainer: "BuildIt"
+    questions:
+        - variable: "JENKINS_CLUSTER_IP"
+          type: "string"
+          default: "100.65.96.143"
+          label: "Jenkins Cluster IP"
+          description: "Jenkins Cluster IP"
+        - variable: "JENKINS_HOST_NAME"
+          type: "string"
+          default: "jenkins.riglet"
+          label: "Jenkins Hostname"
+          description: "Jenkins Hostname"
+          required: true
+        - variable: "JENKINS_PORT"
+          type: "int"
+          default: 8080
+          label: "Jenkins Http Service Port"
+          description: "Public Jenkins Service Http Port"
+          required: true
+        - variable: "JENKINS_SLAVE_PORT"
+          type: "int"
+          default: 50000
+          label: "Jenkins Slave Proxy Port"
+          description: "Public Jenkins Slave Proxy Port"
+          required: true

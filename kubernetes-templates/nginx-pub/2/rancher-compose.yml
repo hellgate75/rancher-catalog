@@ -1,0 +1,36 @@
+.catalog:
+    name: Buildit Nginx Public
+    version: 0.0.2-buildit-aws-elb
+    description: "Buildit Nginx Public Reverse Proxy"
+    maintainer: "BuildIt"
+    questions:
+        - variable: "NGINX_PUB_BACKEND_PORT"
+          type: "int"
+          default: 80
+          label: "Nginx Exposed Backend Port"
+          description: "Public NGinx Backend Port"
+          required: true
+        - variable: "NGINX_PUB_HTTP_PORT"
+          type: "int"
+          default: 80
+          label: "Nginx Exposed Http Port"
+          description: "Public NGinx Http Port"
+          required: true
+        - variable: "NGINX_HTTPS_PORT"
+          type: "int"
+          default: 443
+          label: "Nginx Exposed Https Port"
+          description: "Public NGinx Https Port"
+          required: true
+        - variable: "NGINX_PUB_MONITORING_PORT"
+          type: "int"
+          default: 18080
+          label: "Nginx Exposed Monitoring Port"
+          description: "Public NGinx Monitoring Port"
+          required: true
+        - variable: "NGINX_PUB_LOAD_BALANCER"
+          type: "string"
+          default: "a4c9df4460f5511e7ad030a31f40c1a5-158414082.ap-northeast-1.elb.amazonaws.com"
+          label: "External Load Balancer hostname"
+          description: "External Load Balancer used to connect the Nginx External connectivity, External Endpoint. You can use an elastic IP to connect the Nginx service to the external network"
+          required: true

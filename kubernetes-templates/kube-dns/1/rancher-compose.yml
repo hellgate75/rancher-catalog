@@ -1,0 +1,24 @@
+.catalog:
+    name: Buildit Kubernetes DNS
+    version: 0.0.2-buildit-aws
+    description: "Buildit Kubernetes DNS Stack"
+    maintainer: "BuildIt"
+    questions:
+        - variable: "KUBE_DNS_DOMAIN"
+          type: "string"
+          default: "cluster.local."
+          label: "KubeDNS Domain Name"
+          description: "KubeDNS Domain Name"
+          required: true
+        - variable: "KUBE_CTRL_ROUT53_ZONE"
+          type: "string"
+          default: "ftorelli.rig3.riglet.io"
+          label: "KubeDNS Route53 Hosted-Zone Name"
+          description: "KubeDNS Route53 Hosted-Zone Name"
+          required: true
+        - variable: "KUBE_DNS_PORT"
+          type: "int"
+          default: 53
+          label: "KubeDNS Exposed Port"
+          description: "Public KubeDNS Port"
+          required: true

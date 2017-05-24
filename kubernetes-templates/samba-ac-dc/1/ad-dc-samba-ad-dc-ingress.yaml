@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  generation: 1
+  name: ad-dc-samba-ad-dc
+  namespace: default
+spec:
+  rules:
+  - host: ${SAMBA_HOSTNAME}
+    http:
+      paths:
+      - backend:
+          serviceName: ad-dc-samba-ad-dc
+          servicePort: ${SAMBA_LDAP_PORT}
+        path: /

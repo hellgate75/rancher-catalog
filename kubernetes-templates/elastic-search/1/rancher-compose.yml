@@ -1,0 +1,24 @@
+.catalog:
+    name: Buildit ElasticSearch
+    version: 0.0.2-buildit
+    description: "Buildit ElasticSearch Engine"
+    maintainer: "BuildIt"
+    questions:
+        - variable: "ELASTIC_SEARCH_HOST_NAME"
+          type: "string"
+          default: "elastic-search.riglet"
+          label: "Elastic Search Hostname"
+          description: "Elastic Search Hostname"
+          required: true
+        - variable: "ELASTIC_DB_PORT"
+          type: "int"
+          default: 9200
+          label: "ElasticSearch Exposed Db Port"
+          description: "Public ElasticSearch Db Port"
+          required: true
+        - variable: "ELASTIC_PORT"
+          type: "int"
+          default: 9300
+          label: "ElasticSearch Exposed Port"
+          description: "Public ElasticSearch Port"
+          required: true

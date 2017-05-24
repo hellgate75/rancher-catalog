@@ -1,0 +1,73 @@
+.catalog:
+  name: "BuildIt - Dublin Architecture Department Microservices POC Pipeline"
+  version: "v1"
+  description: "This is a Sampler Microservices Pipeline, Defining some pipelines in the CI infrastructured including Jenkins, Nexus and Sonar."
+  uuid: buildit-microservices-pipeline-1
+  questions:
+    - variable: "JENKINSPORT"
+      label: "Jenkins Public Port"
+      description: "Port on which to run Jenkins Web Interface (fixed for this ansible level)"
+      default: 8080
+      required: true
+      type: "int"
+    - variable: "JENKINSJNLPPORT"
+      label: "Jenkins JNLP Port"
+      description: "Port on which to run Jenkins JNLP Listener (fixed for this ansible level)"
+      default: 50000
+      required: true
+      type: "int"
+    - variable: "SONARPORT"
+      label: "SonarQube Public Port"
+      description: "Port on which to run SonarQube Web Interface (fixed for this ansible level)"
+      default: 9000
+      required: true
+      type: "int"
+    - variable: "SONARLISTENERPORT"
+      label: "SonarQube Listener Port"
+      description: "Port SonarQube Listener Port (fixed for this ansible level)"
+      default: 9092
+      required: true
+      type: "int"
+    - variable: "POSTGRESQLPORT"
+      label: "PostgreSQL Public Port"
+      description: "Port PostgreSQL Port (fixed for this ansible level)"
+      default: 9092
+      required: true
+      type: "int"
+    - variable: "NEXUSPORT"
+      label: "Nexus Public Port"
+      description: "Port on which to run Nexus Web Interface (fixed for this ansible level)"
+      default: 9003
+      required: true
+      type: "int"
+
+sonarqubedb:
+  scale: 1
+
+sonarqube:
+  scale: 1
+  health_check:
+    port: 9000
+    interval: 20000
+    unhealthy_threshold: 180
+    healthy_threshold: 2
+    response_timeout: 5000
+    request_line: 'GET "/sonar" "HTTP/1.0"'
+nexus:
+  scale: 1
+  health_check:
+    port: 8081
+    interval: 20000
+    unhealthy_threshold: 180
+    healthy_threshold: 2
+    response_timeout: 5000
+    request_line: 'GET "/nexus/service/local/status" "HTTP/1.0"'
+jenkins:
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 20000
+    unhealthy_threshold: 360
+    healthy_threshold: 2
+    response_timeout: 5000
+    request_line: 'GET "/" "HTTP/1.0"'

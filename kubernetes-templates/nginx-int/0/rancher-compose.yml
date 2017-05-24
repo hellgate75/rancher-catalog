@@ -1,0 +1,45 @@
+.catalog:
+    name: Buildit Nginx Internal
+    version: 0.0.1-buildit
+    description: "Buildit Nginx Internal Reverse Proxy. Self-defined Cluster-IP version."
+    maintainer: "BuildIt"
+    questions:
+        - variable: "NGINX_INT_BACKEND_CLUSTER_IP"
+          type: "string"
+          default: "100.65.128.242"
+          label: "Nginx Internal Backend Cluster IP"
+          description: "Nginx Internal Backend Cluster IP"
+        - variable: "NGINX_INT_CLUSTER_IP"
+          type: "string"
+          default: "100.65.239.28"
+          label: "Nginx Internal Cluster IP"
+          description: "Nginx Internal Cluster IP"
+        - variable: "NGINX_INT_MONITORING_CLUSTER_IP"
+          type: "string"
+          default: "100.64.30.115"
+          label: "Nginx Internal Monitoring Cluster IP"
+          description: "Nginx Internal Monitoring Cluster IP"
+        - variable: "NGINX_INT_BACKEND_PORT"
+          type: "int"
+          default: 80
+          label: "Nginx Exposed Backend Port"
+          description: "Public Nginx Backend Port"
+          required: true
+        - variable: "NGINX_INT_HTTP_PORT"
+          type: "int"
+          default: 80
+          label: "Nginx Exposed Http Port"
+          description: "Public NGinx Http Port"
+          required: true
+        - variable: "NGINX_INT_HTTPS_PORT"
+          type: "int"
+          default: 443
+          label: "Nginx Exposed Https Port"
+          description: "Public NGinx Https Port"
+          required: true
+        - variable: "NGINX_INT_MONITORING_PORT"
+          type: "int"
+          default: 18080
+          label: "Nginx Exposed Monitoring Port"
+          description: "Public NGinx Monitoring Port"
+          required: true

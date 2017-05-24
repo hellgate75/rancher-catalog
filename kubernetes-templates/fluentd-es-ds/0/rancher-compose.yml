@@ -1,0 +1,5 @@
+.catalog:
+    name: Buildit FluentD ES-DS, Wave-Net Deamon-Sets
+    version: 0.0.1-buildit
+    description: "Buildit FluentD Elatic Search, Wave-Net Deamon-Sets"
+    maintainer: "BuildIt"

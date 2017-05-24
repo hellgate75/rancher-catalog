@@ -1,0 +1,97 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+  generation: 1
+  labels:
+    chart: openvpn-1.0.0
+  name: openvpn-openvpn
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: openvpn-openvpn
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: openvpn-openvpn
+    spec:
+      containers:
+      - env:
+        - name: OVPN_NETWORK
+          value: ${OVPN_NETWORK}
+        - name: OVPN_SUBNET
+          value: ${OVPN_SUBNET}
+        - name: OVPN_PROTO
+          value: ${OVPN_PROTO}
+        - name: OVPN_K8S_SERVICE_NETWORK
+          value: ${OVPN_K8S_SERVICE_NETWORK}
+        - name: OVPN_K8S_SERVICE_SUBNET
+          value: ${OVPN_K8S_SERVICE_SUBNET}
+        - name: OVPN_K8S_POD_NETWORK
+          value: ${OVPN_K8S_POD_NETWORK}
+        - name: OVPN_K8S_POD_SUBNET
+          value: ${OVPN_K8S_POD_SUBNET}
+        - name: LDAP_URL
+          value: ${LDAP_URL}
+        - name: LDAP_BASE_NAME
+          value: ${LDAP_BASE_NAME}
+        - name: LDAP_BIND_NAME
+          value: ${LDAP_BIND_NAME}
+        - name: LDAP_BIND_PASS
+          valueFrom:
+            secretKeyRef:
+              key: ldap.pass
+              name: openvpn-openvpn
+        - name: LDAP_LOGIN_ATTR
+          value: CN
+        - name: REQUIRE_CERT
+          value: "${REQUIRE_CERT}"
+        - name: REQUIRE_PAM
+          value: "${REQUIRE_PAM}"
+        - name: MORE_OPTS
+          value: push "route 172.20.0.0 255.255.0.0"\nduplicate-cn
+        image: builditdigital/openvpn-k8s:latest
+        imagePullPolicy: Always
+        name: openvpn
+        ports:
+        - containerPort: 443
+          name: openvpn
+          protocol: TCP
+        resources:
+          limits:
+            cpu: "1"
+            memory: 198Mi
+          requests:
+            cpu: 200m
+            memory: 128Mi
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+        terminationMessagePath: /dev/termination-log
+        volumeMounts:
+        - mountPath: /etc/openvpn/pki
+          name: openvpn
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: openvpn
+        secret:
+          defaultMode: 420
+          items:
+          - key: certs.p12
+            path: certs.p12
+          - key: dh.pem
+            path: dh.pem
+          secretName: openvpn-openvpn

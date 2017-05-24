@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    chart: nginx-lego-0.2.0
+  name: nginx-int-nginx-lego-monitoring
+  namespace: default
+spec:
+  ports:
+  - name: vts-stats
+    port: 18080
+    protocol: TCP
+    targetPort: 18080
+  selector:
+    app: nginx-int-nginx-lego
+  sessionAffinity: None
+  type: ClusterIP

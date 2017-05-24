@@ -1,0 +1,23 @@
+.catalog:
+    name: Buildit MogoDb Staging
+    version: 0.0.1-buildit
+    description: "Buildit MogoDb Staging Eolas/Synapse Optimized NoSQL Database. Self-defined Cluster-IP version."
+    maintainer: "BuildIt"
+    questions:
+        - variable: "MONGODB_CLUSTER_IP"
+          type: "string"
+          default: "100.68.221.73"
+          label: "MongoDb Cluster IP"
+          description: "MongoDb Cluster IP"
+        - variable: "MONGODB_HOST_NAME"
+          type: "string"
+          default: "mongo-staging-mongodb"
+          label: "MongoDb Hostname"
+          description: "MongoDb Hostname"
+          required: true
+        - variable: "MONGODB_PORT"
+          type: "int"
+          default: 27017
+          label: "MongoDb Service Exposed Port"
+          description: "Public MongoDv Service Port"
+          required: true

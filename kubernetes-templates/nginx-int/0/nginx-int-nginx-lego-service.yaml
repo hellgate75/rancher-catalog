@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-internal: 0.0.0.0/0
+  labels:
+    chart: nginx-lego-0.2.0
+  name: nginx-int-nginx-lego
+  namespace: default
+spec:
+  clusterIP: ${NGINX_INT_CLUSTER_IP}
+  ports:
+  - name: http
+    nodePort: 32084
+    port: ${NGINX_INT_HTTP_PORT}
+    protocol: TCP
+    targetPort: 80
+  - name: https
+    nodePort: 32295
+    port: ${NGINX_INT_HTTPS_PORT}
+    protocol: TCP
+    targetPort: 443
+  - name: monitoring
+    nodePort: 32142
+    port: ${NGINX_INT_MONITORING_PORT}
+    protocol: TCP
+    targetPort: 18080
+  selector:
+    app: nginx-int-nginx-lego
+  sessionAffinity: None
+  type: LoadBalancer

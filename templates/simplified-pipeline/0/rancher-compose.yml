@@ -1,0 +1,143 @@
+.catalog:
+  name: "BuildIt - Generic Ansible Simplified Configuration Pipeline"
+  version: "v1"
+  description: "This is a simple Generic Pipeline from Ansible Databases. In the stack we have the configuration of : Jenkins Ansible, Nexus Ansible, PostgreSQL for SonarQube Ansible, SonarQube Ansible Docker Images. All the ansible procedure will be pulled from a single repository and downloaded on the platform. This playbook wiil have a local scope for the playbooks execution, any role must accept as host: all, local or <ansible host>"
+  uuid: buildit-simplified-pipeline-1
+  questions:
+    - variable: "JENKINSPORT"
+      label: "Jenkins Public Port"
+      description: "Port on which to run Jenkins Web Interface (fixed for this ansible level)"
+      default: 8080
+      required: true
+      type: "int"
+    - variable: "JENKINSJNLPPORT"
+      label: "Jenkins JNLP Port"
+      description: "Port on which to run Jenkins JNLP Listener (fixed for this ansible level)"
+      default: 50000
+      required: true
+      type: "int"
+    - variable: "SONARPORT"
+      label: "SonarQube Public Port"
+      description: "Port on which to run SonarQube Web Interface (fixed for this ansible level)"
+      default: 9000
+      required: true
+      type: "int"
+    - variable: "SONARLISTENERPORT"
+      label: "SonarQube Listener Port"
+      description: "Port SonarQube Listener Port (fixed for this ansible level)"
+      default: 9092
+      required: true
+      type: "int"
+    - variable: "POSTGRESQLPORT"
+      label: "PostgreSQL Public Port"
+      description: "Port PostgreSQL Port (fixed for this ansible level)"
+      default: 9092
+      required: true
+      type: "int"
+    - variable: "NEXUSPORT"
+      label: "Nexus Public Port"
+      description: "Port on which to run Nexus Web Interface (fixed for this ansible level)"
+      default: 9003
+      required: true
+      type: "int"
+    - variable: "KEYURL"
+      label: "SSH Keys Web URL"
+      description: "Tarball file un-secured web url, containing private, public keys and eventually the known_hosts files to access the ansible repositories via git, this credetials will be shredded after the use."
+      required: true
+      type: "string"
+    - variable: "MAINREPOURL"
+      label: "Main Ansible Repsitory URL"
+      description: "Main Ansible Repository git/github/bitbuclet/etc.. URL, used to access the playbooks"
+      required: true
+      type: "string"
+    - variable: "MAINREPOBRANCH"
+      label: "Main Ansible Repsitory Branch Reference"
+      description: "Branch reference to switch to in the playbooks repository (e.g. master or develop or mybranch or ...)"
+      required: true
+      type: "string"
+    - variable: "MAINREPOFOLDER"
+      label: "Main Ansible Repsitory Base Folder"
+      description: "Base Folder relevant to the Main repo root containing the base playbooks (e.g. in folder repo_root/mytechnology/mystack we have the playbooks, we have to define as : mytechnology/mystack)"
+      required: true
+      type: "string"
+    - variable: "ROLESREPOURL"
+      label: "Roles Ansible Repsitory URL"
+      description: "Roles Ansible Repository git/github/bitbuclet/etc.. URL, used by playbooks to describe roles and features in the playbook"
+      required: true
+      type: "string"
+    - variable: "ROLESREPOBRANCH"
+      label: "Roles Ansible Repsitory Branch Reference"
+      description: "Branch reference to switch to in the playbooks roles repository (e.g. master or develop or mybranch or ...)"
+      required: true
+      type: "string"
+    - variable: "ROLESREPOFOLDER"
+      label: "Roles Ansible Repsitory Base Folder"
+      description: "Base Folder relevant to the Roles repo root containing the base playbooks roles folders (e.g. in folder repo_root/mycompany/myroles we have the playbooks, we have to define as : mycompany/myroles)"
+      required: true
+      defaut: "roles"
+      type: "string"
+    - variable: "GITUSER"
+      label: "GIT/GITHUB/BITBUCLET/etc.. User Name"
+      description: "Playbooks/Roles Ansible Repository git/github/bitbuclet/etc.. user name"
+      required: true
+      type: "string"
+    - variable: "GITEMAIL"
+      label: "GIT/GITHUB/BITBUCLET/etc.. User Name"
+      description: "Playbooks/Roles Ansible Repository git/github/bitbuclet/etc.. user email address"
+      required: true
+      type: "string"
+    - variable: "JENKINSPLAYBOOKS"
+      label: "Ansible Jenkins Playbooks"
+      description: "List of ansible playbooks to run without (.yml) extension, comma separated string, relative to the main playbook folder (e.g. in folder repo_root/mycompany/myroles we have the playbooks, if mytechnology/mystack/aaa.yml we type down aaa, elsewise we have mytechnology/bbb.yml we type down ../bbb relative to mytechnology/mystack [Main Ansible Repsitory Base Folder])"
+      required: true
+      defaut: "jenkins"
+      type: "string"
+    - variable: "NEXUSPLAYBOOKS"
+      label: "Ansible Nexus Playbooks"
+      description: "List of ansible playbooks to run without (.yml) extension, comma separated string, relative to the main playbook folder (e.g. in folder repo_root/mycompany/myroles we have the playbooks, if mytechnology/mystack/aaa.yml we type down aaa, elsewise we have mytechnology/bbb.yml we type down ../bbb relative to mytechnology/mystack [Main Ansible Repsitory Base Folder])"
+      required: true
+      defaut: "nexus"
+      type: "string"
+    - variable: "SONARDBPLAYBOOKS"
+      label: "Ansible SonarQube's PostgresSQL Playbooks"
+      description: "List of ansible playbooks to run without (.yml) extension, comma separated string, relative to the main playbook folder (e.g. in folder repo_root/mycompany/myroles we have the playbooks, if mytechnology/mystack/aaa.yml we type down aaa, elsewise we have mytechnology/bbb.yml we type down ../bbb relative to mytechnology/mystack [Main Ansible Repsitory Base Folder])"
+      required: true
+      defaut: "postgresql"
+      type: "string"
+    - variable: "SONARPLAYBOOKS"
+      label: "Ansible SonarQube Playbooks"
+      description: "List of ansible playbooks to run without (.yml) extension, comma separated string, relative to the main playbook folder (e.g. in folder repo_root/mycompany/myroles we have the playbooks, if mytechnology/mystack/aaa.yml we type down aaa, elsewise we have mytechnology/bbb.yml we type down ../bbb relative to mytechnology/mystack [Main Ansible Repsitory Base Folder])"
+      required: true
+      defaut: "sonarqube"
+      type: "string"
+
+sonarqubedb:
+  scale: 1
+
+sonarqube:
+  scale: 1
+  health_check:
+    port: 9000
+    interval: 20000
+    unhealthy_threshold: 180
+    healthy_threshold: 2
+    response_timeout: 5000
+    request_line: 'GET "/sonar" "HTTP/1.0"'
+nexus:
+  scale: 1
+  health_check:
+    port: 8081
+    interval: 20000
+    unhealthy_threshold: 180
+    healthy_threshold: 2
+    response_timeout: 5000
+    request_line: 'GET "/nexus/service/local/status" "HTTP/1.0"'
+jenkins:
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 20000
+    unhealthy_threshold: 360
+    healthy_threshold: 2
+    response_timeout: 5000
+    request_line: 'GET "/" "HTTP/1.0"'

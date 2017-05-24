@@ -1,0 +1,112 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: '{"kind":"DaemonSet","apiVersion":"extensions/v1beta1","metadata":{"name":"weave-net","namespace":"kube-system","creationTimestamp":null,"labels":{"role.kubernetes.io/networking":"1"}},"spec":{"template":{"metadata":{"creationTimestamp":null,"labels":{"name":"weave-net","role.kubernetes.io/networking":"1"},"annotations":{"scheduler.alpha.kubernetes.io/tolerations":"[\n  {\n    \"key\":
+      \"dedicated\",\n    \"operator\": \"Equal\",\n    \"value\": \"master\",\n    \"effect\":
+      \"NoSchedule\"\n  }\n]\n"}},"spec":{"volumes":[{"name":"weavedb","emptyDir":{}},{"name":"cni-bin","hostPath":{"path":"/opt"}},{"name":"cni-bin2","hostPath":{"path":"/home"}},{"name":"cni-conf","hostPath":{"path":"/etc"}},{"name":"dbus","hostPath":{"path":"/var/lib/dbus"}},{"name":"lib-modules","hostPath":{"path":"/lib/modules"}}],"containers":[{"name":"weave","image":"weaveworks/weave-kube:1.9.3","command":["/home/weave/launch.sh"],"resources":{"limits":{"cpu":"100m","memory":"200Mi"},"requests":{"cpu":"100m","memory":"200Mi"}},"volumeMounts":[{"name":"weavedb","mountPath":"/weavedb"},{"name":"cni-bin","mountPath":"/host/opt"},{"name":"cni-bin2","mountPath":"/host/home"},{"name":"cni-conf","mountPath":"/host/etc"},{"name":"dbus","mountPath":"/host/var/lib/dbus"},{"name":"lib-modules","mountPath":"/lib/modules"}],"livenessProbe":{"httpGet":{"path":"/status","port":6784,"host":"127.0.0.1"},"initialDelaySeconds":30},"securityContext":{"privileged":true}},{"name":"weave-npc","image":"weaveworks/weave-npc:1.9.3","resources":{"limits":{"cpu":"100m","memory":"200Mi"},"requests":{"cpu":"100m","memory":"200Mi"}},"securityContext":{"privileged":true}}],"restartPolicy":"Always","hostNetwork":true,"hostPID":true}}},"status":{"currentNumberScheduled":0,"numberMisscheduled":0,"desiredNumberScheduled":0,"numberReady":0}}'
+  creationTimestamp: 2017-03-22T22:35:46Z
+  generation: 1
+  labels:
+    role.kubernetes.io/networking: "1"
+  name: weave-net
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      name: weave-net
+      role.kubernetes.io/networking: "1"
+  template:
+    metadata:
+      annotations:
+        scheduler.alpha.kubernetes.io/tolerations: |
+          [
+            {
+              "key": "dedicated",
+              "operator": "Equal",
+              "value": "master",
+              "effect": "NoSchedule"
+            }
+          ]
+      creationTimestamp: null
+      labels:
+        name: weave-net
+        role.kubernetes.io/networking: "1"
+    spec:
+      containers:
+      - command:
+        - /home/weave/launch.sh
+        image: weaveworks/weave-kube:1.9.3
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            host: 127.0.0.1
+            path: /status
+            port: 6784
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: weave
+        resources:
+          limits:
+            cpu: 100m
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
+        securityContext:
+          privileged: true
+        terminationMessagePath: /dev/termination-log
+        volumeMounts:
+        - mountPath: /weavedb
+          name: weavedb
+        - mountPath: /host/opt
+          name: cni-bin
+        - mountPath: /host/home
+          name: cni-bin2
+        - mountPath: /host/etc
+          name: cni-conf
+        - mountPath: /host/var/lib/dbus
+          name: dbus
+        - mountPath: /lib/modules
+          name: lib-modules
+      - image: weaveworks/weave-npc:1.9.3
+        imagePullPolicy: IfNotPresent
+        name: weave-npc
+        resources:
+          limits:
+            cpu: 100m
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
+        securityContext:
+          privileged: true
+        terminationMessagePath: /dev/termination-log
+      dnsPolicy: ClusterFirst
+      hostNetwork: true
+      hostPID: true
+      restartPolicy: Always
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - emptyDir: {}
+        name: weavedb
+      - hostPath:
+          path: /opt
+        name: cni-bin
+      - hostPath:
+          path: /home
+        name: cni-bin2
+      - hostPath:
+          path: /etc
+        name: cni-conf
+      - hostPath:
+          path: /var/lib/dbus
+        name: dbus
+      - hostPath:
+          path: /lib/modules
+        name: lib-modules

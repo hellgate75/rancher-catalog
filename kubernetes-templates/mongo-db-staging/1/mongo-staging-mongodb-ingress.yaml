@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  generation: 1
+  name: mongo-staging-mongodb
+  namespace: default
+spec:
+  rules:
+  - host: ${MONGODB_HOST_NAME}
+    http:
+      paths:
+      - backend:
+          serviceName: mongo-staging-mongodb
+          servicePort: ${MONGODB_PORT}
+        path: /

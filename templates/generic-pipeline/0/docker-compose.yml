@@ -1,0 +1,156 @@
+sonarqubedbvolumes:
+  image: builditftorelli/postgresql-ansible:9.6.2
+  entrypoint: ['/bin/bash']
+  command: ['/bin/bash']
+sonarqubedb:
+  labels:
+    io.rancher.sidekicks: sonarqubedbvolumes
+  image: builditftorelli/postgresql-ansible:9.6.2
+  container_name: sonardb-ansible-compose
+  restart: unless-stopped
+  tty: true
+  stdin_open: true
+  hostname: ${SONARDBHOST}.${SONARDBDOMAIN}
+  environment:
+    - MAIN_REPO_URL=${MAINREPOURL}
+    - MAIN_REPO_BRANCH=${MAINREPOBRANCH}
+    - MAIN_REPO_FOLDER=${MAINREPOFOLDER}
+    - ROLES_REPO_URL=${ROLESREPOURL}
+    - ROLES_REPO_BRANCH=${ROLESREPOBRANCH}
+    - ROLES_REPO_FOLDER=${ROLESREPOFOLDER}
+    - PLAYBOOKS=${SONARDBPLAYBOOKS}
+    - USER_NAME=${GITUSER}
+    - USER_EMAIL=${GITEMAIL}
+    - ANSIBLE_HOSTNAME=${SONARDBANSIBLEHOST}
+    - HOSTNAME=${SONARDBHOST}
+    - RIGLETDOMAIN=${SONARDBDOMAIN}
+    - PRESTART_POSTGRES=${SONARDBPRESTART}
+    - RESTART_POSTGRES_AFTER_ANSIBLE=${SONARDBRESTART}
+    - POSTGRES_PASSWORD=4n4lys1s
+    - POSTGRES_USER=${SONARDBUSER}
+    - POSTGRES_DB=${SONARDBPASSWD}
+    - POSTGRES_OS_USER=
+    - POSTGRES_OS_GROUP=
+    - PRIVATE_PUBLIC_KEY_TAR_URL=${KEYURL}
+  ports:
+    - ${POSTGRESQLPORT}:5432
+  volumes_from:
+    - sonarqubedbvolumes
+sonarqubevolumes:
+  image: builditftorelli/sonarqube-ansible:6.2
+  entrypoint: ['/bin/bash']
+  command: ['/bin/bash']
+sonarqube:
+  labels:
+    io.rancher.sidekicks: sonarqubevolumes
+  links:
+    - sonarqubedb:sonar-db.riglet
+  image: builditftorelli/sonarqube-ansible:6.2
+  container_name: sonarqube-ansible-compose
+  restart: unless-stopped
+  tty: true
+  stdin_open: true
+  hostname: ${SONARHOST}.${SONARDOMAIN}
+  environment:
+    - MAIN_REPO_URL=${MAINREPOURL}
+    - MAIN_REPO_BRANCH=${MAINREPOBRANCH}
+    - MAIN_REPO_FOLDER=${MAINREPOFOLDER}
+    - ROLES_REPO_URL=${ROLESREPOURL}
+    - ROLES_REPO_BRANCH=${ROLESREPOBRANCH}
+    - ROLES_REPO_FOLDER=${ROLESREPOFOLDER}
+    - PLAYBOOKS=${SONARPLAYBOOKS}
+    - USER_NAME=${GITUSER}
+    - USER_EMAIL=${GITEMAIL}
+    - USER_CREDENTIALS=
+    - ANSIBLE_HOSTNAME=${SONARANSIBLEHOST}
+    - HOSTNAME=${SONARHOST}
+    - RIGLETDOMAIN=${SONARDOMAIN}
+    - PRESTART_SONARQUBE=${SONARPRESTART}
+    - POSTSTART_SONARQUBE=${SONARPOSTSTART}
+    - SONARQUBE_JDBC_USERNAME=${SONARJDBCUSER}
+    - SONARQUBE_JDBC_PASSWORD=${SONARJDBCPASSWD}
+    - SONARQUBE_JDBC_URL=${SONARJDBCURI}
+    - SONARQUBE_WEB_JVM_OPTS=${SONARJVMOPTS}
+    - SONARQUBE_ANSIBLE_DEFINED_CONTEXT_PATH=${SONARCONTEXT}
+    - RESTART_SONARQUBE_AFTER_ANSIBLE=${SONARRESTART}
+    - PRIVATE_PUBLIC_KEY_TAR_URL=${KEYURL}
+  ports:
+    - ${SONARPORT}:9000
+    - ${SONARLISTENERPORT}:9092
+  volumes_from:
+    - sonarqubevolumes
+nexusvolumes:
+  image: builditftorelli/nexus-ansible:oss
+  entrypoint: ['/bin/bash']
+  command: ['/bin/bash']
+nexus:
+  labels:
+    io.rancher.sidekicks: nexusvolumes
+  image: builditftorelli/nexus-ansible:oss
+  container_name: nexus-ansible-compose
+  restart: unless-stopped
+  tty: true
+  stdin_open: true
+  hostname: ${NEXUSHOST}.${NEXUSDOMAIN}
+  environment:
+    - MAIN_REPO_URL=${MAINREPOURL}
+    - MAIN_REPO_BRANCH=${MAINREPOBRANCH}
+    - MAIN_REPO_FOLDER=${MAINREPOFOLDER}
+    - ROLES_REPO_URL=${ROLESREPOURL}
+    - ROLES_REPO_BRANCH=${ROLESREPOBRANCH}
+    - ROLES_REPO_FOLDER=${ROLESREPOFOLDER}
+    - PLAYBOOKS=${NEXUSPLAYBOOKS}
+    - USER_NAME=${GITUSER}
+    - USER_EMAIL=${GITEMAIL}
+    - USER_CREDENTIALS=
+    - ANSIBLE_HOSTNAME=${NEXUSANSIBLEHOST}
+    - HOSTNAME=${NEXUSHOST}
+    - RIGLETDOMAIN=${NEXUSDOMAIN}
+    - PRESTART_NEXUS=${NEXUSPRESTART}
+    - POSTSTART_NEXUS=${NEXUSPOSTSTART}
+    - RESTART_NEXUS_AFTER_ANSIBLE=${NEXUSRESTART}
+    - PRIVATE_PUBLIC_KEY_TAR_URL=${KEYURL}
+  ports:
+    - ${NEXUSPORT}:8081
+  volumes_from:
+    - nexusvolumes
+jenkinsvolumes:
+  image: builditftorelli/jenkins-ansible:2.32.3
+  entrypoint: ['/bin/bash']
+  command: ['/bin/bash']
+jenkins:
+  labels:
+    io.rancher.sidekicks: jenkinsvolumes
+  links:
+    - sonarqube:sonar.riglet
+    - nexus:nexus.riglet
+  image: builditftorelli/jenkins-ansible:2.32.3
+  container_name: jenkins-ansible-compose
+  privileged: true
+  restart: unless-stopped
+  tty: true
+  stdin_open: true
+  hostname: ${JENKINSHOST}.${JENKINSDOMAIN}
+  environment:
+    - MAIN_REPO_URL=${MAINREPOURL}
+    - MAIN_REPO_BRANCH=${MAINREPOBRANCH}
+    - MAIN_REPO_FOLDER=${MAINREPOFOLDER}
+    - ROLES_REPO_URL=${ROLESREPOURL}
+    - ROLES_REPO_BRANCH=${ROLESREPOBRANCH}
+    - ROLES_REPO_FOLDER=${ROLESREPOFOLDER}
+    - PLAYBOOKS=${JENKINSPLAYBOOKS}
+    - USER_NAME=${GITUSER}
+    - USER_EMAIL=${GITEMAIL}
+    - USER_CREDENTIALS=
+    - ANSIBLE_HOSTNAME=${JENKINSANSIBLEHOST}
+    - HOSTNAME=${JENKINSHOST}
+    - RIGLETDOMAIN=${JENKINSDOMAIN}
+    - PRESTART_JENKINS=${JENKINSPRESTART}
+    - RESTART_JENKINS_AFTER_ANSIBLE=${JENKINSRESTART}
+    - PRIVATE_PUBLIC_KEY_TAR_URL=${KEYURL}
+    - PLUGINS_TEXT_FILE_URL=${PLUGINSTEXTURL}
+  ports:
+    - ${JENKINSPORT}:8080
+    - ${JENKINSJNLPPORT}:50000
+  volumes_from:
+    - jenkinsvolumes

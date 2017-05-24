@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  generation: 1
+  name: jenkins-jenkins
+  namespace: default
+spec:
+  rules:
+  - host: ${JENKINS_HOST_NAME}
+    http:
+      paths:
+      - backend:
+          serviceName: jenkins-jenkins
+          servicePort: ${JENKINS_PORT}
+        path: /

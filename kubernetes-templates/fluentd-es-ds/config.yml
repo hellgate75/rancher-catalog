@@ -1,0 +1,6 @@
+name: Buildit FluentD ES-DS, Wave-Net Deamon-Sets
+version: 0.0.1-buildit
+description: |
+  FluentD ElasticSearch, Wave-Net Deamon-Sets Buildit component is a Logging Agent for the ElasticSearch Services
+  for Rancher Kubernetes environments.
+category: System

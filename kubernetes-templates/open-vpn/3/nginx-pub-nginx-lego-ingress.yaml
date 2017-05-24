@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  generation: 1
+  name: nginx-pub-nginx-lego
+  namespace: default
+spec:
+  rules:
+  - host: ${NGINX_PUB_HOST_NAME}
+    http:
+      paths:
+      - backend:
+          serviceName: nginx-pub-nginx-lego
+          servicePort: ${NGINX_HTTP_PORT}
+        path: /
+  - host: ${NGINX_PUB_HOST_NAME}
+    http:
+      paths:
+      - backend:
+          serviceName: nginx-pub-nginx-lego
+          servicePort: ${NGINX_HTTPS_PORT}
+        path: /
+  - host: ${NGINX_PUB_HOST_NAME}
+    http:
+      paths:
+      - backend:
+          serviceName: nginx-pub-nginx-lego
+          servicePort: ${NGINX_PUB_MONITORING_PORT}
+        path: /

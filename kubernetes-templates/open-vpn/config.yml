@@ -1,0 +1,6 @@
+name: Buildit Open VPN
+version: 0.0.2-buildit-aws-elb
+description: |
+  Open VPN Buildit component is an Open VPN Controller Service providing remote connectivity
+  for Rancher Kubernetes environments.
+category: Networking
