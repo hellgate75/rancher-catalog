@@ -1,9 +1,9 @@
-# Rancher BuildIt Catalog 
+# Custom Rancher Catalog 
 
-This catalog provides templates created by the BuildIt community, and they are not maintained or supported by BuildIt - Center of excellence, Dublin, Republic of Ireland.
+This catalog provides templates created by the [Fabrizio Torelli](https://www.linkedin.com/in/fabriziotorelli/).
 
 # License
-Copyright (c) 2016-2017 [BuildIt, Inc.](http://buildit.digital)
+Copyright (c) 2016-2017 [Fabrizio Torelli](https://www.linkedin.com/in/fabriziotorelli/)
 
 Licensed under the [MIT](/LICENSE) License (the "License");
 you may not use this file except in compliance with the License.
